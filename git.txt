@@ -31,7 +31,10 @@
 │       └── remotes
 │           └── origin
 │               └── main
-├── objects
+├── 
+
+
+
 │   ├── 6b
 │   │   └── c68eae9cb8ba9c62d2115d64cc9fe4e457bfe9
 │   ├── a3
@@ -130,7 +133,10 @@ commit message
 │       └── remotes
 │           └── origin
 │               └── main
-├── objects
+├── 
+
+
+
 │   ├── 1d
 │   │   └── 9811c65311a5ed25aab85ee82ad0ab6cfb090b
 │   ├── 24
@@ -228,3 +234,93 @@ Date:   Sun Oct 30 12:46:15 2022 +0800
 
 
 
+
+git checout a commit:
+
+(base) hanzt@hanzt:~/codes/docs$ git checkout a32a4c
+Note: switching to 'a32a4c'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at a32a4c5 first commit
+(base) hanzt@hanzt:~/codes/docs$ git log
+commit a32a4c53bc242497e0aa95d81068bc95c6133133 (HEAD)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 10:23:23 2022 +0800
+
+    first commit
+
+create a new branch on checkout commit:
+(base) hanzt@hanzt:~/codes/docs$ git checkout -b tmp
+Switched to a new branch 'tmp'
+(base) hanzt@hanzt:~/codes/docs$ git log
+commit a32a4c53bc242497e0aa95d81068bc95c6133133 (HEAD -> tmp)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 10:23:23 2022 +0800
+
+    first commit
+
+git reflog:
+(base) hanzt@hanzt:~/codes/docs$ git reflog
+a32a4c5 (HEAD -> tmp) HEAD@{0}: checkout: moving from a32a4c53bc242497e0aa95d81068bc95c6133133 to tmp
+a32a4c5 (HEAD -> tmp) HEAD@{1}: checkout: moving from main to a32a4c
+6627ef8 (main) HEAD@{2}: checkout: moving from dev to main
+978b86f (dev) HEAD@{3}: checkout: moving from main to dev
+6627ef8 (main) HEAD@{4}: checkout: moving from dev to main
+978b86f (dev) HEAD@{5}: commit: add docker.txt
+6627ef8 (main) HEAD@{6}: checkout: moving from main to dev
+6627ef8 (main) HEAD@{7}: commit: 4rd modify git.txt
+ce9806d (origin/main) HEAD@{8}: commit: 3rd modify git.txt
+e3eecdc HEAD@{9}: commit: modify 2rd git.txt
+98e78f7 HEAD@{10}: commit: modify 1st git.txt
+1d9811c HEAD@{11}: commit: add git.txt
+a32a4c5 (HEAD -> tmp) HEAD@{12}: Branch: renamed refs/heads/master to refs/heads/main
+a32a4c5 (HEAD -> tmp) HEAD@{14}: commit (initial): first commit
+(base) hanzt@hanzt:~/codes/docs$ 
+
+
+
+git diff // diff of index vs working
+git diff --cached // diff of index vs reposity
+
+
+git gc  //compress data of 
+
+
+
+
+git prune
+
+
+(base) hanzt@hanzt:~/codes/docs$ git prune -n
+4dde549b99410f0c3e32bdaf1dc4e5ba54220b4a blob
+6dad8b8904fd794800cd4d617784b9057ac8098d blob
+96e9497d8f559b95e3c12c631bc848c32ce12208 blob
+b6dff291979e85b79a82a432badb7f99be765566 blob
+
+(base) hanzt@hanzt:~/codes/docs$ git fsck
+Checking object directories: 100% (256/256), done.
+dangling blob 4dde549b99410f0c3e32bdaf1dc4e5ba54220b4a
+dangling blob 96e9497d8f559b95e3c12c631bc848c32ce12208
+dangling blob 6dad8b8904fd794800cd4d617784b9057ac8098d
+dangling blob b6dff291979e85b79a82a432badb7f99be765566
+
+
+git merge --fast forwad
+
+merge dev to master
+1)git checkout master
+2)git merge dev
