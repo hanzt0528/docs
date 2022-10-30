@@ -2,6 +2,7 @@
 .git:
 tree .git/                //view git files
 cat .git/HEAD             //view current ref
+cat .git/FETCH_HEAD       //view on wich branch to do git fetch last time.
 ls .git/refs/heads/       //view all branch on local 
 git ls-files -s
 git cat-file -t objectid  //type
@@ -29,8 +30,12 @@ git remote -v              //view orign urls
 git remote show origin
 git remote prune           //prune remote unused object or branch
 git fetch                  //get remote info to local synch current local branch with remote branch
+git fetch -v               //with  more info 
 git merge origin/main      //merge origin/main to current local main
 git pull                   // = git fetch + git merge origin/main
+git reset --hard ORIG_HEAD // disable last merge ,may be in the git pull  cmd do the git merge.
+
+git push                   //push curren branch to remote ,must be that,the branch on  remote yet.
 git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
 git rebase main            //rebase current branch(it create on the pre main branch) to new current main branch,than we can "fast forwad" merge dev to main(call : git merge dev).
 git gc                     //pack all object to zip file on local repository 
@@ -57,8 +62,12 @@ git diff orign/main
 git merge origin/main      //merge origin/main to current local main
 git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
 
-
-
+case create branch and push to remote:
+git branch feature1                       //create a new branch on local 
+git push --set-upstream origin feature1   //create a new branche on remote ,and link local and remote. link because use option "--set-upstream"
+git push -u origin feature1               //same to above
+git branch -vv                            //view 
+git push                                  //push tracked branch to remote branch.
 
 .git
 ├── branches
