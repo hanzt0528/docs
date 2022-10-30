@@ -1,5 +1,33 @@
 
-  
+.git:
+tree .git/                //view git files
+cat .git/HEAD             //view current ref
+ls .git/refs/heads/       //view all branch on local 
+git ls-files -s
+git cat-file -t objectid  //type
+git cat-file -s objectid  //size
+git cat-file -p objectid  //content
+
+git:
+git diff                   //view curent working diff to INDEX
+git diff --cached          //view INDEX diff to last commit 
+git diff HEAD              //view current working diff to local repository
+git add .                  //add file to INDEX on local
+git commit -m "message"    //create a commit on local 
+git log                    //view all logs
+git log --graph            //view all logs with graph mode
+git branch                 //view current branch is,and others branches.
+git branch dev             //create a dev branch on current branch
+git checkout dev           //switch current branch to dev
+git checkout objectid      //stitch a commit object 
+git merge dev              //merge the dev branch to current branch(current branch  must be not dev)
+git remote                 //view remote name( it is origin sometimes)
+git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
+git rebase main            //rebase current branch(it create on the pre main branch) to new current main branch,than we can "fast forwad" merge dev to main(call : git merge dev).
+git gc                     //pack all object to zip file on local repository 
+git prune                  //delete more  objects in git INDEX
+
+
 .git
 ├── branches
 ├── COMMIT_EDITMSG
@@ -330,5 +358,48 @@ git merge ---3 way merge
 
 git log --graph
 
-
 git rebase
+git log --graph
+
+* commit 421347ce3c5e1af529269a063a002551675525e9 (HEAD -> dev)
+| Author: hanzt <hanzt@hanzt>
+| Date:   Sun Oct 30 16:50:06 2022 +0800
+| 
+|     m2 readme on dev
+| 
+* commit 2ea822f4cc6d3b5a2ea29f0e9ac24719850597d3
+| Author: hanzt <hanzt@hanzt>
+| Date:   Sun Oct 30 16:49:20 2022 +0800
+| 
+|     m readme on dev
+|   
+*   commit 9a4fff278d85c8f772817bcb02f24b1a456ffec3
+|\  Merge: 907ccac 8b26ea4
+| | Author: hanzt <hanzt@hanzt>
+| | Date:   Sun Oct 30 16:31:28 2022 +0800
+| | 
+| |     Merge branch 'dev' into main
+
+git rebase main  (current branch on dev)
+
+* commit f25dc5108e3edde8e5be099a580a67d2e64ba84e (HEAD -> dev)
+| Author: hanzt <hanzt@hanzt>
+| Date:   Sun Oct 30 16:50:06 2022 +0800
+| 
+|     m2 readme on dev
+| 
+* commit 6005bb954e685543db2ca6e1fe86bd3651f573ac
+| Author: hanzt <hanzt@hanzt>
+| Date:   Sun Oct 30 16:49:20 2022 +0800
+| 
+|     m readme on dev
+| 
+* commit a7287d4c59fdb3099986e5618f056efd891ad156 (main)
+| Author: hanzt <hanzt@hanzt>
+| Date:   Sun Oct 30 16:50:51 2022 +0800
+| 
+|     m read me on main
+|   
+
+git checkout main  //git fast forward step1
+git merge dev // git fast forward step2
