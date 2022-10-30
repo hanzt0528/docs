@@ -329,3 +329,6 @@ git merge ---3 way merge
 
 
 git log --graph
+
+
+git rebase
