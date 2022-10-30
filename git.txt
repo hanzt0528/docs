@@ -163,11 +163,67 @@ commit message
     1)Related with current active branch
     2)Always point to the latest commit
 
+branch cmd:
+    git branch; list all branches
+    git branch <branch-name>  ; create a branch.
+    git branch -D <branch-name>; delete a branch,it must not current activate branch.
+    git checkout <branch-name>; change current branch to <branch-name>
 
 
-    
+    (base) hanzt@hanzt:~/codes/docs$ git branch
+* main
+(base) hanzt@hanzt:~/codes/docs$ git branch dev
+(base) hanzt@hanzt:~/codes/docs$ git branch
+  dev
+* main
+(base) hanzt@hanzt:~/codes/docs$ git log
+commit 6627ef8c7e4e216b9a2a3800ed25db1b17f2a77b (HEAD -> main, dev)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 13:26:39 2022 +0800
+
+    4rd modify git.txt
+
+commit ce9806d1f92c60636cf8a34c334ff8daaca5d583 (origin/main)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 13:22:44 2022 +0800
+
+    3rd modify git.txt
+
+(base) hanzt@hanzt:~/codes/docs$ ls .git/refs/heads/
+dev  main
+
+(base) hanzt@hanzt:~/codes/docs$ cat .git/refs/heads/dev
+6627ef8c7e4e216b9a2a3800ed25db1b17f2a77b
 
 
+Switch branch to dev:
+
+ (base) hanzt@hanzt:~/codes/docs$ cat .git/HEAD 
+ref: refs/heads/main
+(base) hanzt@hanzt:~/codes/docs$ git checkout dev
+M	git.txt
+Switched to branch 'dev'
+(base) hanzt@hanzt:~/codes/docs$ cat .git/HEAD 
+ref: refs/heads/dev
+(base) hanzt@hanzt:~/codes/docs$ git log
+commit 6627ef8c7e4e216b9a2a3800ed25db1b17f2a77b (HEAD -> dev, main)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 13:26:39 2022 +0800
+
+    4rd modify git.txt
+
+commit ce9806d1f92c60636cf8a34c334ff8daaca5d583 (origin/main)
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 13:22:44 2022 +0800
+
+    3rd modify git.txt
+
+commit e3eecdcbc4d295572a61fffc1edd942fbabd8f3a
+Author: hanzt <hanzt@hanzt>
+Date:   Sun Oct 30 12:46:15 2022 +0800
+
+    modify 2rd git.txt
+ 
 
 
 
