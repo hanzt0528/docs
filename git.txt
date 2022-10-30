@@ -16,16 +16,29 @@ git add .                  //add file to INDEX on local
 git commit -m "message"    //create a commit on local 
 git log                    //view all logs
 git log --graph            //view all logs with graph mode
-git branch                 //view current branch is,and others branches.
+git branch                 //view current branch is,and others branches on local repository
+git branch -r              //view branches on remote repository
+git branch -a              //view branches on local and remote repository
 git branch dev             //create a dev branch on current branch
 git checkout dev           //switch current branch to dev
 git checkout objectid      //stitch a commit object 
 git merge dev              //merge the dev branch to current branch(current branch  must be not dev)
 git remote                 //view remote name( it is origin sometimes)
+git remote -v              //view orign urls
+git remote show origin
+git fetch                  //get remote info to local synch current local branch with remote branch
+git merge origin/main      //merge origin/main to current local main
 git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
 git rebase main            //rebase current branch(it create on the pre main branch) to new current main branch,than we can "fast forwad" merge dev to main(call : git merge dev).
 git gc                     //pack all object to zip file on local repository 
 git prune                  //delete more  objects in git INDEX
+git fsck                   //view used object
+git tag  v1.0.0            //create a lightweight tag,only crate a tag  locate:.git/refs/tags
+git tag -d v1.0.0          //delete a tag  
+git tag -a v1.0.0 -m "version v1.0.0" //crate a annotated tag,
+                       locate:.git/refs/tags and .git/objects/(creage a object ,wich type is tag) 
+git tag -a v1.0.0 b8a8 -m  "version v1.0.0"  //crate a tag use a commit objectid
+git tag                    // list all tags
 
 
 .git
