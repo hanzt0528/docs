@@ -41,6 +41,15 @@ git tag -a v1.0.0 b8a8 -m  "version v1.0.0"  //crate a tag use a commit objectid
 git tag                    // list all tags
 
 
+
+case check in you code to remote repository:
+1)git fetch                  //get remote info to local synch current local branch with remote branch
+2)git merge origin/main      //merge origin/main to current local main
+3)git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
+
+
+
+
 .git
 ├── branches
 ├── COMMIT_EDITMSG
