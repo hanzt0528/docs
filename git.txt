@@ -326,3 +326,6 @@ merge dev to master
 2)git merge dev 
 
 git merge ---3 way merge
+
+
+git log --graph
