@@ -69,3 +69,92 @@ blob
 (base) hanzt@hanzt:~/codes/docs$ git cat-file -p c81e    // view object content
 #docs
 
+
+commit:
+(base) hanzt@hanzt:~/codes/docs$ cat .git/refs/heads/main 
+1d9811c65311a5ed25aab85ee82ad0ab6cfb090b
+
+
+(base) hanzt@hanzt:~/codes/docs$ git cat-file -p 1d98
+tree 9607f3ede3f90375a120f62166dbcaff55014136
+parent a32a4c53bc242497e0aa95d81068bc95c6133133
+author hanzt <hanzt@hanzt> 1667102637 +0800
+committer hanzt <hanzt@hanzt> 1667102637 +0800
+
+add git.txt
+
+
+(base) hanzt@hanzt:~/codes/docs$ git cat-file -p 9607f
+100644 blob c81e93eb85cf6108b97436d66de913995adf3357	README.md
+100644 blob 2477c72742f264e818457f05656c37985bb4651c	git.txt
+(base) hanzt@hanzt:~/codes/docs$  
+
+
+commit:(commit is a object too)
+tree - > files
+parent
+author
+committer
+commit message
+
+
+(base) hanzt@hanzt:~/codes/docs$ tree .git/
+.git/
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── FETCH_HEAD
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── logs
+│   ├── HEAD
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       └── remotes
+│           └── origin
+│               └── main
+├── objects
+│   ├── 1d
+│   │   └── 9811c65311a5ed25aab85ee82ad0ab6cfb090b
+│   ├── 24
+│   │   └── 77c72742f264e818457f05656c37985bb4651c
+│   ├── 6b
+│   │   └── c68eae9cb8ba9c62d2115d64cc9fe4e457bfe9
+│   ├── 96
+│   │   ├── 07f3ede3f90375a120f62166dbcaff55014136
+│   │   └── e9497d8f559b95e3c12c631bc848c32ce12208
+│   ├── a3
+│   │   └── 2a4c53bc242497e0aa95d81068bc95c6133133
+│   ├── b6
+│   │   └── dff291979e85b79a82a432badb7f99be765566
+│   ├── c8
+│   │   └── 1e93eb85cf6108b97436d66de913995adf3357
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    │   └── main
+    ├── remotes
+    │   └── origin
+    │       └── main
+    └── tags
+
+
+    
