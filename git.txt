@@ -324,3 +324,5 @@ git merge --fast forwad
 merge dev to master
 1)git checkout master
 2)git merge dev 
+
+git merge ---3 way merge
