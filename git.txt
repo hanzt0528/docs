@@ -37,6 +37,7 @@ git reset --hard ORIG_HEAD // disable last merge ,may be in the git pull  cmd do
 
 git push                   //push curren branch to remote ,must be that,the branch on  remote yet.
 git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
+git push origin -d feature1   //delete remote branch feature1
 git rebase main            //rebase current branch(it create on the pre main branch) to new current main branch,than we can "fast forwad" merge dev to main(call : git merge dev).
 git gc                     //pack all object to zip file on local repository 
 git prune                  //delete more  objects in git INDEX
@@ -68,6 +69,26 @@ git push --set-upstream origin feature1   //create a new branche on remote ,and 
 git push -u origin feature1               //same to above
 git branch -vv                            //view 
 git push                                  //push tracked branch to remote branch.
+
+
+case temp work:
+git checkout dev 
+git add .
+git stash
+git checkout other branch
+do some things 
+than
+git checkout dev 
+git stash pop
+
+case2 temp work:
+git worktree add ../awx-demo-master master
+git worktree list
+cd ../awx-demo-master
+git worktree remove awx-demo-master
+
+
+
 
 .git
 ├── branches
