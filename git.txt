@@ -27,6 +27,7 @@ git merge dev              //merge the dev branch to current branch(current bran
 git remote                 //view remote name( it is origin sometimes)
 git remote -v              //view orign urls
 git remote show origin
+git remote prune           //prune remote unused object or branch
 git fetch                  //get remote info to local synch current local branch with remote branch
 git merge origin/main      //merge origin/main to current local main
 git pull                   // = git fetch + git merge origin/main
@@ -49,10 +50,12 @@ merge:
 
 
 case check in you code to remote repository:
-1)git fetch                  //get remote info to local synch current local branch with remote branch
-2)git diff orign/main
-2)git merge origin/main      //merge origin/main to current local main
-3)git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
+git branch -a 
+git remote show origin
+git fetch                  //get remote info to local synch current local branch with remote branch
+git diff orign/main
+git merge origin/main      //merge origin/main to current local main
+git push origin main       //push a local branch (like that main,it can is a new branch on your local) to remote repository
 
 
 
