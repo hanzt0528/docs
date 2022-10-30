@@ -1,0 +1,71 @@
+
+  
+.git
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── FETCH_HEAD
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── logs
+│   ├── HEAD
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       └── remotes
+│           └── origin
+│               └── main
+├── objects
+│   ├── 6b
+│   │   └── c68eae9cb8ba9c62d2115d64cc9fe4e457bfe9
+│   ├── a3
+│   │   └── 2a4c53bc242497e0aa95d81068bc95c6133133
+│   ├── c8
+│   │   └── 1e93eb85cf6108b97436d66de913995adf3357
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    │   └── main
+    ├── remotes
+    │   └── origin
+    │       └── main
+    └── tags
+
+(base) hanzt@hanzt:~/codes/docs$ git ls-files  // list all file in .git/Index 
+README.md
+git.txt
+
+
+(base) hanzt@hanzt:~/codes/docs$ git ls-files -s
+100644 c81e93eb85cf6108b97436d66de913995adf3357 0	README.md
+100644 96e9497d8f559b95e3c12c631bc848c32ce12208 0	git.txt
+--------------------------------------------------------------------
+auth hash  filename
+
+(base) hanzt@hanzt:~/codes/docs$  git cat-file -p c81e93eb85cf6108b97436d66de913995adf3357
+#docs
+
+        
+(base) hanzt@hanzt:~/codes/docs$ git cat-file -t c81e    // view object type 
+blob
+
+(base) hanzt@hanzt:~/codes/docs$ git cat-file -p c81e    // view object content
+#docs
+
