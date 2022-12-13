@@ -1,0 +1,203 @@
+shared_ptr:
+0 create a shared_ptr:
+    1)
+        std::shared_ptr<A> a(new A);
+    2)
+        std::shared_ptr<A> a
+        a.reset(new A);
+    3)with destructor
+        std::shared_ptr<A> a(new A,loggingDel);
+
+    4) from weak_ptr
+        auto spw = std::make_shared<Widget>(10);
+        std::weak_ptr<Widget> wpw(spw);
+        wpw.expired();//
+        std::shared_ptr<Widget> pw = wpw.lock();
+
+    5)from unique_ptr
+        std::unique_ptr<A,decltype(loggingDel2)> a(new A,loggingDel2);
+        std::unique_ptr<A,decltype(loggingDel2)> b = std::move(a);
+        std::shared_ptr<A> c = std::move(a);
+
+1use_count() :query reference cont 
+    std::shared_ptr<A> a(new A);
+    call a.use_count();
+
+2reset()  reference count = 0;
+    std::shared_ptr<A> a(new A);
+    call a.reset();
+
+3unique_ptr move-only type(std::move)
+    for unique_ptr errors:
+        std::unique_ptr<int> p2 = p1 // copy constructor
+        std::unique_ptr<int> p3(p2)  // copy constructor
+        std::unique_ptr<int> p4;
+        p4 = p2                      // = operator
+4.unique_ptr transfer to fuction.
+    void pass_up(std::unique_ptr<int> up)
+    {
+        std::cout << "In pass_up:"<<*up<<std::endl;
+    }
+    int main(int argc,char* argv[])
+    {
+        auto up = std::make_unique<int>(100);
+        
+        pass_up(std::move(up));
+
+    return 0;
+    }
+
+5 memory layout:
+    8B VTABEL_addr
+    4B use_count
+    4B weak_count
+    8B M_ptr
+
+6Constructor
+    1)copy constructor. A(const A& other)
+    2)copy assignment operator. A& operator=(const A& other)
+    3)move constructor. A(A&& other)
+    4)move assignment operator. A& operator=(A&&other)
+
+    //Constructor:
+    class A
+    {
+        public:
+        A(){
+            data=nullptr;
+            length = 0;
+        };
+        ~A(){};
+
+        //copy constructor.
+        A(const A& other)
+        :length(other.length),
+        data(new int[other.length]){
+            std::cout << "copy constructor" << std::endl;
+            std::copy(other.data,other.data+other.length,data);
+        };
+
+        //copy assignment operator.
+    
+        A& operator=(const A& other){
+            std::cout << "copy assignment operator."<<std::endl;
+            if(this != &other){
+                if(data != nullptr) delete []data;
+                length = other.length;
+                data = new int[other.length];
+                std::copy(other.data,other.data+other.length,data);
+            }
+
+            return *this;
+        };
+
+        //move constructor
+        A(A&& other)
+        :length(0),
+        data(nullptr){
+            std::cout << "move constructor."<<std::endl;
+            length = other.length;
+            data = other.data;
+            other.length = 0; 
+            other.data = nullptr;
+        };
+
+        //move assignment operator
+        A& operator=(A&&other){
+            std::cout << "move assignment operator."<<std::endl;
+            if(this != &other){
+                length = other.length;
+                data = other.data;
+                other.length = 0;
+                other.data = nullptr;
+            }
+            return *this;
+        };
+        public:
+        int *data;
+        int length;
+    };
+
+7 costum delete function
+    FILE *fp = fopen("1.txe","w");
+    std::shared_ptr<FILE> pf{fp,close_file};
+
+
+    auto loggingDel = [](A*a){
+        if (a != nullptr)
+            delete a;
+    };
+
+    std::shared_ptr<A> a(new A,loggingDel);
+    std::unique_ptr<A,decltype(loggingDel)> b(new A,loggingDel);
+    std::shared_ptr<A> n = std::move(b);
+ 
+8 enable_shared_ptr_from_this
+    #include <iostream>
+    #include <memory>
+    #include <vector>
+    class C;
+    std::vector<std::shared_ptr<C>> processedC;
+    class C:public std::enable_shared_from_this<C>{
+    public:
+        ~C()
+        {
+            std::cout <<"~C()"<<std::endl;
+        };
+        template <typename ... Ts>
+        static std::shared_ptr<C> create(Ts&&... params)
+        {
+            return std::make_shared<C>(params...);
+        };
+
+        void process()
+        {
+            processedC.emplace_back(shared_from_this());
+        }
+
+        public:
+        int i{2000};
+        void print(){
+            std::cout << "print "<< i <<std::endl;
+        };
+    };
+
+    int main(int argc,char* argv[])
+    {
+        auto c = C::create();
+        c->process();
+    };
+
+
+
+
+
+
+
+
+ 
+
+    A * ap = new A();
+    std::shared_ptr<A> sp(ap);
+
+    std::cout << "sp.use_count = "<< sp.use_count()<<std::endl;
+
+    std::shared_ptr<A> sp2 = sp;
+
+
+    sp.reset();
+
+2reset()  reference count = 0
+3std::shared_ptr<B> p = std::make_shared<B>(1,2);
+
+    class B
+    {
+        public:
+        B(int i,int k){};
+        ~B(){
+            std::cout << "~A()"<<std::endl;
+        };
+
+        void print(){std::cout << "print."<<std::endl;};
+    };
+
