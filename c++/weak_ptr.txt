@@ -1,0 +1,6 @@
+create:
+    auto spw = std::make_shared<Widget>(10);
+    std::weak_ptr<Widget> wpw(spw);
+
+use:
+    std::shared_ptr<Widget> spw = wpw.lock();
