@@ -1,0 +1,50 @@
+C++ explicit关键字详解
+首先, C++中的explicit关键字只能用于修饰只有一个参数的类构造函数, 它的作用是表明该构造函数是显示的, 而非隐式的, 跟它相对应的另一个关键字是implicit, 意思是隐藏的,类构造函数默认情况下即声明为implicit(隐式).
+
+在C++中, 如果的构造函数只有一个参数时, 那么在编译的时候就会有一个缺省的转换操作:将该构造函数对应数据类型的数据转换为该类对象. 也就是说 “CxString string2 = 10;” 这段代码, 编译器自动将整型转换为CxString类对象, 实际上等同于下面的操作:
+
+
+
+#include <iostream>
+#include <memory>
+#include <string.h>
+class CString{
+    public:
+    CString(int size)
+    {
+        size_ = size;
+        pstr_ = (char*)malloc(size+1);
+        memset(pstr_,0,size+1);
+        std::cout << " CString(int size) call" <<std::endl;
+    };
+    private:
+    char *pstr_;
+    size_t size_;
+};
+
+int main()
+{
+    CString s = 12;//ok call CString(int size)
+    return 0;
+}
+
+
+class CString{
+    public:
+    explicit CString(int size)
+    {
+        size_ = size;
+        pstr_ = (char*)malloc(size+1);
+        memset(pstr_,0,size+1);
+        std::cout << " CString(int size) call" <<std::endl;
+    };
+    private:
+    char *pstr_;
+    size_t size_;
+};
+
+int main()
+{
+    CString s = 12;//error because explicit 
+    return 0;
+}
