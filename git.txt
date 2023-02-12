@@ -88,6 +88,17 @@ cd ../awx-demo-master
 git worktree remove awx-demo-master
 
 
+submodule:
+
+获取子模块代码：
+1）获取代码时， --recurse-submodules
+ git clone -b xxx  --recurse-submodules URL
+
+2）进入主项目，然后
+git submodule init
+git submodule update
+
+
 
 
 .git
